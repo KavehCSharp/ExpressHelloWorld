@@ -1,12 +1,12 @@
 FROM node:14-alpine
 
-ENV APP_ROOT /src
+WORKDIR /usr/src/app
 
-RUN mkdir ${APP_ROOT}
-WORKDIR ${APP_ROOT}
-ADD . ${APP_ROOT}
+COPY package*.json ./
 
 RUN npm install
-RUN npm run build
 
-ENV HOST 0.0.0.0
+COPY . .
+
+EXPOSE 8080
+CMD [ "node", "index.js" ]
